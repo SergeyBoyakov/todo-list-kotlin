@@ -1,2 +1,3 @@
-# todo-list-kotlin
-Todo list pet project. Spring boot
+# Todo list pet project. Spring boot
+
+
