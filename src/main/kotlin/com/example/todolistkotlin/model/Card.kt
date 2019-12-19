@@ -11,19 +11,20 @@ import javax.persistence.*
 @Table(name = "cards")
 @EntityListeners(AuditingEntityListener::class)
 data class Card(
-
-
     @Column(name = "title")
-    val title: String,
+    var title: String?,
 
     @Column(name = "description")
-    val description: String
+    var description: String?
 ) {
+
+    constructor(card: Card) : this(card.title, card.description)
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null
 
+    // todo do something with date class, its depricated
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     lateinit var createdDate: Date

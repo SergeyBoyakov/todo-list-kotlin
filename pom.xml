@@ -57,6 +57,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>com.willowtreeapps.assertk</groupId>
+			<artifactId>assertk-jvm</artifactId>
+			<version>0.20</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk</artifactId>
+			<version>1.9.3.kotlin12</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -12,7 +12,7 @@ class CardRepository {
     @PersistenceContext
     private lateinit var entityManager: EntityManager
 
-    open fun createCard(): Card {
+    fun createEmptyCard(): Card {
         // todo no-arg plugin doesn't work this way?
         val card = Card(title = "", description = "")
 
@@ -25,7 +25,23 @@ class CardRepository {
         return card
     }
 
-    open fun findAllCards(): List<Card> {
+    fun createCard(card: Card): Card {
+        val createdCard = Card(card)
+
+        return saveCard(createdCard)
+    }
+
+    fun saveCard(card: Card): Card {
+        with(entityManager) {
+            transaction.begin()
+            persist(card)
+            transaction.commit()
+        }
+
+        return card
+    }
+
+    fun findAllCards(): List<Card> {
         entityManager.transaction.begin()
         val query = entityManager.createQuery("SELECT e FROM cards e")
 
