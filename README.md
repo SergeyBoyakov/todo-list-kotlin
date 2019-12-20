@@ -2,7 +2,7 @@
 
 ## Plan:
 
-#### Story 1:[BE] Card feature: DONE
+#### Story:[BE] Card feature: DONE
 
 1. User should be able to see all cards
 Status: done
@@ -17,7 +17,7 @@ Status: done
 Status: done
 
 
-#### Story 2: [BE] Users feature 
+#### Story: [BE] Users feature: In Progress
 
 1. Card should have author (creator), which is one of the users
 Status: todo
@@ -25,17 +25,28 @@ Status: todo
 2. User should have first name, last name, email
 Status: todo
 
+#### Tech debt: [BE] add controller tests
 
-#### Story 3: [BE] Swagger
+1. Add tests for card controller
+Status: todo
+
+2. Add tests for user controller
+Status: todo
+
+
+#### Story: [BE] Swagger 
 
 1. Add swagger to the project
+Status: todo
 
 
-#### Story 4: [BE] Maven hierarchy
+#### Story: [BE] Maven hierarchy
 
 1. Make project hierarchical
+Status: todo
 
-#### Story 5: [BE] Card should have creation date and last modified date
+
+#### Story: [BE] Card should have creation date and last modified date
 1. Add creation date to card
 Status: todo
 
