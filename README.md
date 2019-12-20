@@ -25,6 +25,14 @@ Status: todo
 2. User should have first name, last name, email
 Status: todo
 
+#### Tech debt: [BE] separate packages by features
+
+1. Move all classes for Card feature to specific package
+Status: todo
+
+2. Move all classes for Users feature to specific package
+Status: todo
+
 #### Tech debt: [BE] add controller tests
 
 1. Add tests for card controller
@@ -33,6 +41,7 @@ Status: todo
 2. Add tests for user controller
 Status: todo
 
+#### Tech debt: [BE] rewrite all microservice test to 1 field 1 test. Is it more readable?
 
 #### Story: [BE] Swagger 
 

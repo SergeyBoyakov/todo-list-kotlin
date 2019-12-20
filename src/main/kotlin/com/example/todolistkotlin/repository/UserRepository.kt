@@ -40,6 +40,10 @@ class UserRepository(
         return user
     }
 
+    fun saveAll(users: List<User>) {
+        users.forEach { saveUser(it) }
+    }
+
     fun deleteUserById(userId: Long) {
         val user = findUserById(userId)
         entityManager.remove(user)
