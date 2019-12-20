@@ -4,8 +4,10 @@ import com.example.todolistkotlin.converter.CardConverter
 import com.example.todolistkotlin.dto.CardDto
 import com.example.todolistkotlin.repository.CardRepository
 import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
 @Service
+@Transactional
 class CardService(
     private val cardRepository: CardRepository,
     private val converter: CardConverter

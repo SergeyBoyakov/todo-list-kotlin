@@ -1,25 +1,23 @@
 # Todo list pet project. Spring boot
 
-
 ## Plan:
 
-#### Story 1:[BE] Card feature
+#### Story 1:[BE] Card feature: DONE
 
 1. User should be able to see all cards
-Status: In progress
+Status: done
 
 2. User should be able to create card
-Status: todo
+Status: done
 
 3. User should be able to update card 
-Status: todo
+Status: done
 
 4. User should be able to delete card.
-    AC: Card on deletion should be marked 'isDeleted' but not removed from DB
-Status: todo
+Status: done
 
 
-#### Story 2: [BE] Users feature
+#### Story 2: [BE] Users feature 
 
 1. Card should have author (creator), which is one of the users
 Status: todo
@@ -37,6 +35,12 @@ Status: todo
 
 1. Make project hierarchical
 
+#### Story 5: [BE] Card should have creation date and last modified date
+1. Add creation date to card
+Status: todo
+
+2. Add last modified date to card
+Status: todo
 
 
 #### Terminology

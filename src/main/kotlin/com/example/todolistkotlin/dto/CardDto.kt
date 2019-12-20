@@ -11,6 +11,4 @@ class CardDto {
     var id: Long? = null
     var title: String? = null
     var description: String? = null
-    var createdAt: Date? = null
-    var updatedAt: Date? = null
 }

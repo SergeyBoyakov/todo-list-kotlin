@@ -2,11 +2,13 @@ package com.example.todolistkotlin.repository
 
 import com.example.todolistkotlin.exception.CardNotFoundException
 import com.example.todolistkotlin.model.Card
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.transaction.Transactional
 
-@Service
+@Repository
+@Transactional
 class CardRepository {
     // container managed entity manager
     @PersistenceContext
@@ -17,9 +19,7 @@ class CardRepository {
         val card = Card(title = "", description = "")
 
         entityManager.run {
-            transaction.begin()
             persist(card)
-            transaction.commit()
         }
 
         return card
@@ -33,39 +33,28 @@ class CardRepository {
 
     fun saveCard(card: Card): Card {
         with(entityManager) {
-            transaction.begin()
             persist(card)
-            transaction.commit()
         }
 
         return card
     }
 
     fun findAllCards(): List<Card> {
-        entityManager.transaction.begin()
-        val query = entityManager.createQuery("SELECT e FROM cards e")
-
-        val resultList = query.resultList
-        entityManager.transaction.commit()
-
-        return resultList as List<Card>
+        return entityManager.createQuery("SELECT c FROM Card c", Card::class.java).resultList
     }
 
     open fun findCardById(id: Long): Card {
-        entityManager.transaction.begin()
-        val card = entityManager.find(Card::class.java, id)
+        return entityManager.find(Card::class.java, id)
             ?: throw CardNotFoundException("Card with id: $id not found")
-        entityManager.transaction.commit()
-
-        return card
     }
 
     open fun deleteCardById(id: Long) {
-        entityManager.transaction.begin()
-
         val card = findCardById(id)
         entityManager.remove(card)
+    }
 
-        entityManager.transaction.commit()
+    open fun deleteAll() {
+        val query = entityManager.createQuery("DELETE FROM Card")
+        query.executeUpdate()
     }
 }

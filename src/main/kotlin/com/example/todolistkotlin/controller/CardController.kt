@@ -26,15 +26,15 @@ class CardController(private val cardService: CardService) {
         return ResponseEntity.created(URI.create("/cards/$id")).build()
     }
 
-    @PutMapping
-    fun updateCard(@RequestBody cardDto: CardDto, cardId: Long): ResponseEntity<CardDto> {
+    @PutMapping("/{cardId}")
+    fun updateCard(@RequestBody cardDto: CardDto, @PathVariable(value = "cardId") cardId: Long): ResponseEntity<CardDto> {
         cardService.updateCard(cardDto, cardId)
 
         return ResponseEntity.noContent().build()
     }
 
-    @DeleteMapping
-    fun deleteCard(cardId: Long): ResponseEntity<Long> {
+    @DeleteMapping("/{cardId}")
+    fun deleteCard(@PathVariable(value = "cardId") cardId: Long): ResponseEntity<Long> {
         cardService.deleteCardById(cardId)
 
         return ResponseEntity.noContent().build()

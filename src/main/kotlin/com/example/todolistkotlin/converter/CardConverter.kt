@@ -19,8 +19,6 @@ class CardConverter {
             id = entity.id
             title = entity.title
             description = entity.description
-            createdAt = entity.createdDate
-            updatedAt = entity.updatedDate
         }
     }
 
@@ -31,3 +29,4 @@ class CardConverter {
 
     open fun toDtos(entities: List<Card>): List<CardDto> = entities.map(this::toDto)
 }
+
