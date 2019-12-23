@@ -2,6 +2,7 @@ package com.example.todolistkotlin.repository
 
 import com.example.todolistkotlin.exception.CardNotFoundException
 import com.example.todolistkotlin.model.Card
+import com.example.todolistkotlin.model.User
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
@@ -16,7 +17,7 @@ class CardRepository {
 
     fun createEmptyCard(): Card {
         // todo no-arg plugin doesn't work this way?
-        val card = Card(title = "", description = "")
+        val card = Card(title = "", description = "", creator = User())
 
         entityManager.run {
             persist(card)

@@ -5,24 +5,23 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.example.todolistkotlin.dto.CardDto
 import com.example.todolistkotlin.model.Card
-import org.junit.jupiter.api.BeforeEach
+import com.example.todolistkotlin.model.User
+import com.example.todolistkotlin.utils.creator.getPredefinedUserDto
+import com.example.todolistkotlin.utils.creator.getPredefinedUserEntity
+import io.mockk.mockk
 import org.junit.jupiter.api.Test
 
 internal class CardConverterTest {
-    // todo  do something with nullable, if CardConverter?=null -> a lot of nullable checks
-    private var converter: CardConverter = CardConverter()
-
-    @BeforeEach
-    fun initCardConverter() {
-        converter = CardConverter()
-    }
+    private val userConverter = mockk<UserConverter>(relaxed = true)
+    private val converter = CardConverter(userConverter)
 
     @Test
     fun `should convert dto to entity`() {
         // given:
-        val cardDto = CardDto().apply {
+        val cardDto = getPredefinedCardDto().apply {
             title = "title"
             description = "desc"
+            creator = getPredefinedUserDto()
         }
 
         // when:
@@ -40,8 +39,9 @@ internal class CardConverterTest {
     @Test
     fun `should convert entity to dto`() {
         // given:
-        val card = Card(title = "title", description = "desc").apply {
-            id = 1L
+        val card = getPredefinedCard().apply {
+            cardId = 1L
+            creator = getPredefinedUserEntity()
         }
 
         // when:
@@ -52,8 +52,8 @@ internal class CardConverterTest {
             assertAll {
                 assertAll {
                     assertThat(id).isEqualTo(1L)
-                    assertThat(title).isEqualTo("title")
-                    assertThat(description).isEqualTo("desc")
+                    assertThat(title).isEqualTo("firstTitle")
+                    assertThat(description).isEqualTo("firstDesc")
                 }
             }
         }
@@ -62,10 +62,10 @@ internal class CardConverterTest {
     @Test
     fun `should populate entity`() {
         // given:
-        val cardEntity = Card(title = "oldTitle", description = "oldDesc").apply {
-            id = 2L
+        val cardEntity = getPredefinedCard().apply {
+            cardId = 2L
         }
-        val cardDto = CardDto().apply {
+        val cardDto = getPredefinedCardDto().apply {
             title = "newTitle"
             description = "newDesc"
         }
@@ -76,7 +76,7 @@ internal class CardConverterTest {
         // then:
         with(cardEntity) {
             assertAll {
-                assertThat(id).isEqualTo(2L)
+                assertThat(cardId).isEqualTo(2L)
                 assertThat(description).isEqualTo("newDesc")
                 assertThat(title).isEqualTo("newTitle")
             }
@@ -86,11 +86,15 @@ internal class CardConverterTest {
     @Test
     fun `should convert collection of entities to dtos`() {
         // given:
-        val firstCard = Card(title = "firstTitle", description = "firstDesc").apply {
-            id = 1L
+        val firstCard = getPredefinedCard().apply {
+            cardId = 1L
+            title = "firstTitle"
+            description = "firstDesc"
         }
-        val secondCard = Card(title = "secondTitle", description = "secondDesc").apply {
-            id = 2L
+        val secondCard = getPredefinedCard().apply {
+            cardId = 2L
+            title = "secondTitle"
+            description = "secondDesc"
         }
 
         // when:
@@ -114,5 +118,13 @@ internal class CardConverterTest {
                 }
             }
         }
+    }
+
+    private fun getPredefinedCard() = Card(title = "firstTitle", description = "firstDesc", creator = User())
+
+    private fun getPredefinedCardDto() = CardDto().apply {
+        title = "dto title"
+        description = "dto desc"
+        creator = getPredefinedUserDto()
     }
 }

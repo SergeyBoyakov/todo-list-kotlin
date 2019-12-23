@@ -1,10 +1,6 @@
 package com.example.todolistkotlin.model
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.Instant
-import java.util.*
 import javax.persistence.*
 
 
@@ -16,14 +12,19 @@ data class Card(
     var title: String?,
 
     @Column(name = "description")
-    var description: String?
+    var description: String?,
+
+    @ManyToOne(
+        cascade = [CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH],
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "user_id", nullable = false)
+    var creator: User
 ) {
 
-    constructor(card: Card) : this(card.title, card.description)
+    constructor(card: Card) : this(card.title, card.description, card.creator)
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null
-
+    var cardId: Long? = null
 }
-
