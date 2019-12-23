@@ -2,24 +2,20 @@
 
 ## Plan:
 
-- ![@f03c15](https://placehold.it/15/f03c15/000000?text=+) 
-- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
-- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+)
-- ![](https://placehold.it/15/9b45e4/000000?text=+)
 ---
 #### Story:[BE] Card feature: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 1. User should be able to see all cards
-Status: done ![](https://placehold.it/15/42e6a4/000000?text=+)
+![](https://placehold.it/15/42e6a4/000000?text=+)
 
 2. User should be able to create card
-Status: done ![](https://placehold.it/15/42e6a4/000000?text=+)
+![](https://placehold.it/15/42e6a4/000000?text=+)
 
 3. User should be able to update card 
-Status: done ![](https://placehold.it/15/42e6a4/000000?text=+)
+![](https://placehold.it/15/42e6a4/000000?text=+)
 
 4. User should be able to delete card.
-Status: done ![](https://placehold.it/15/42e6a4/000000?text=+)
+![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
 #### Story: [BE] Users feature: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
@@ -31,7 +27,10 @@ Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
-#### Tech debt: [BE] separate packages by features
+#### Tech debt: [BE] Migrate to Spring Data JPA ![](https://placehold.it/15/42e6a4/000000?text=+)
+
+---
+#### Tech debt: [BE] separate packages by features ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 1. Move all classes for Card feature to specific package
 Status: todo
@@ -40,7 +39,7 @@ Status: todo
 Status: todo
 
 ---
-#### Tech debt: [BE] add controller tests
+#### Tech debt: [BE] add controller tests ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 1. Add tests for card controller
 Status: todo
@@ -49,25 +48,25 @@ Status: todo
 Status: todo
 
 ---
-#### Tech debt: [BE] rewrite all microservice test to 1 field 1 test. Is it more readable?
+#### Tech debt: [BE] rewrite all microservice test to 1 field 1 test. Is it more readable?  ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 ---
-#### Story: [BE] Swagger 
+#### Story: [BE] Swagger ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 1. Add swagger to the project
 Status: todo
 
 ---
-#### Story: [BE] Maven hierarchy
+#### Story: [BE] Maven hierarchy ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 1. Make project hierarchical
 Status: todo
 
 ---
-#### Story: [BE] Maven hierarchy
+#### Story: [BE] Maven hierarchy ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 ---
-#### Story: [BE] Card should have creation date and last modified date
+#### Story: [BE] Card should have creation date and last modified date ![](https://placehold.it/15/f03c15/000000?text=+) 
 1. Add creation date to card
 Status: todo
 
@@ -75,10 +74,14 @@ Status: todo
 Status: todo
 
 ---
-#### Story: [BE] Maven hierarchy
+#### Story: [BE] Maven hierarchy ![](https://placehold.it/15/f03c15/000000?text=+) 
 
 ---
 #### Terminology
 
 [BE] prefix - means that this story will be implemented on backend side.
 
+Status:
+- ![](https://placehold.it/15/42e6a4/000000?text=+) Done
+- ![](https://placehold.it/15/9b45e4/000000?text=+) In progress
+- ![](https://placehold.it/15/f03c15/000000?text=+) Todo

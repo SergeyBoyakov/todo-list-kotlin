@@ -6,8 +6,8 @@ import assertk.assertions.*
 import com.example.todolistkotlin.MicroserviceIsolatedTest
 import com.example.todolistkotlin.dto.CardDto
 import com.example.todolistkotlin.repository.CardRepository
-import com.example.todolistkotlin.utils.creator.getPredefinedCardEntity
 import com.example.todolistkotlin.utils.creator.getPredefinedCardDto
+import com.example.todolistkotlin.utils.creator.getPredefinedCardEntity
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -38,8 +38,8 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
             description = "secondDescription"
         }
 
-        cardRepository.saveCard(firstCard)
-        cardRepository.saveCard(secondCard)
+        cardRepository.save(firstCard)
+        cardRepository.save(secondCard)
 
         // when:
         val foundCards = cardService.findAllCards()
@@ -82,7 +82,7 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should update card by id`() {
         // given:
-        val existingCard = cardRepository.createEmptyCard()
+        val existingCard = cardRepository.save(getPredefinedCardEntity())
         with(existingCard) {
             assertThat(cardId).isNotNull()
             assertThat(title).isEqualTo("")
@@ -110,13 +110,13 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should delete card by id`() {
         // given:
-        val cardId = cardRepository.createEmptyCard().cardId
+        val cardId = cardRepository.save(getPredefinedCardEntity()).cardId
 
         // when:
         cardService.deleteCardById(cardId!!)
 
         // then:
-        assertThat { cardRepository.findCardById(cardId) }
+        assertThat { cardRepository.findById(cardId) }
             .isFailure().hasMessage("Card with id: $cardId not found")
     }
 }

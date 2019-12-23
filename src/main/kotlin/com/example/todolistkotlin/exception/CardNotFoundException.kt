@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import java.lang.RuntimeException
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-class CardNotFoundException(message: String) : RuntimeException(message)
+class CardNotFoundException(cardId: Long) : RuntimeException("Card with id: $cardId not found")
+
 
 
