@@ -1,5 +1,6 @@
 *.swp
 HELP.md
+PLAN.md
 QUESTIONS.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
