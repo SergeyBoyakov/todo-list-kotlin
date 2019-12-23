@@ -9,7 +9,7 @@ class UserConverter {
 
     fun toDto(userEntity: User): UserDto {
         return UserDto().apply {
-            id = userEntity.id
+            id = userEntity.userId
             email = userEntity.email
             firstName = userEntity.firstName
             lastName = userEntity.lastName
@@ -18,7 +18,7 @@ class UserConverter {
 
     fun toEntity(userDto: UserDto): User {
         return User().apply {
-            id = userDto.id
+            userId = userDto.id
             email = userDto.email
             firstName = userDto.firstName
             lastName = userDto.lastName

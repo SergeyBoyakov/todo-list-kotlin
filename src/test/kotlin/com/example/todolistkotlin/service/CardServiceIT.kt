@@ -5,8 +5,9 @@ import assertk.assertThat
 import assertk.assertions.*
 import com.example.todolistkotlin.MicroserviceIsolatedTest
 import com.example.todolistkotlin.dto.CardDto
-import com.example.todolistkotlin.model.Card
 import com.example.todolistkotlin.repository.CardRepository
+import com.example.todolistkotlin.utils.creator.getPredefinedCardEntity
+import com.example.todolistkotlin.utils.creator.getPredefinedCardDto
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -28,8 +29,15 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should get all cards from database`() {
         // given:
-        val firstCard = Card(title = "firstTitle", description = "firstDescription")
-        val secondCard = Card(title = "secondTitle", description = "secondDescription")
+        val firstCard = getPredefinedCardEntity().apply {
+            title = "firstTitle"
+            description = "firstDescription"
+        }
+        val secondCard = getPredefinedCardEntity().apply {
+            title = "secondTitle"
+            description = "secondDescription"
+        }
+
         cardRepository.saveCard(firstCard)
         cardRepository.saveCard(secondCard)
 
@@ -53,7 +61,7 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should create new card`() {
         // given:
-        val cardDto = CardDto().apply {
+        val cardDto = getPredefinedCardDto().apply {
             title = "title"
             description = "desc"
         }
@@ -76,7 +84,7 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
         // given:
         val existingCard = cardRepository.createEmptyCard()
         with(existingCard) {
-            assertThat(id).isNotNull()
+            assertThat(cardId).isNotNull()
             assertThat(title).isEqualTo("")
             assertThat(description).isEqualTo("")
         }
@@ -87,12 +95,12 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
         }
 
         // when:
-        val updatedCard = cardService.updateCard(cardDto, existingCard.id!!)
+        val updatedCard = cardService.updateCard(cardDto, existingCard.cardId!!)
 
         // then:
         with(updatedCard) {
             assertAll {
-                assertThat(id).isEqualTo(existingCard.id)
+                assertThat(id).isEqualTo(existingCard.cardId)
                 assertThat(title).isEqualTo("new title")
                 assertThat(description).isEqualTo("new desc")
             }
@@ -102,7 +110,7 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should delete card by id`() {
         // given:
-        val cardId = cardRepository.createEmptyCard().id
+        val cardId = cardRepository.createEmptyCard().cardId
 
         // when:
         cardService.deleteCardById(cardId!!)

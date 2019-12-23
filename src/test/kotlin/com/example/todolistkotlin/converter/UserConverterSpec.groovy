@@ -14,7 +14,7 @@ class UserConverterSpec extends Specification {
     def 'should convert user entity to user dto'() {
         given:
         def userEntity = new User(
-                id: 1L,
+                userId: 1L,
                 email: "cptjacksparrow@google.com",
                 firstName: "Jack",
                 lastName: "Sparrow"
@@ -43,7 +43,7 @@ class UserConverterSpec extends Specification {
         def userEntity = converter.toEntity(userDto)
 
         then:
-        userEntity.id == 1L
+        userEntity.userId == 1L
         userEntity.email == "cptjacksparrow@google.com"
         userEntity.firstName == "Jack"
         userEntity.lastName == "Sparrow"
@@ -52,13 +52,13 @@ class UserConverterSpec extends Specification {
     def 'should convert list of entities to list of dtos'() {
         given:
         def firstUserEntity = new User(
-                id: 1L,
+                userId: 1L,
                 email: "cptjacksparrow@google.com",
                 firstName: "Jack",
                 lastName: "Sparrow"
         )
         def secondUserEntity = new User(
-                id: 2L,
+                userId: 2L,
                 email: "cptbarbossa@google.com",
                 firstName: "Hector",
                 lastName: "Barbossa"
@@ -85,14 +85,14 @@ class UserConverterSpec extends Specification {
 
     def 'should populate entity from dto'() {
         given:
-        def userEntity = new User(id: 1L, email: "", firstName: "", lastName: "")
+        def userEntity = new User(userId: 1L, email: "", firstName: "", lastName: "")
         def userDto = new UserDto(email: "geohot@comma.ai", firstName: "George", lastName: "Hotz")
 
         when:
         converter.populateEntity(userEntity, userDto)
 
         then:
-        userEntity.id == 1L
+        userEntity.userId == 1L
         userEntity.email == "geohot@comma.ai"
         userEntity.firstName == "George"
         userEntity.lastName == "Hotz"
@@ -100,14 +100,14 @@ class UserConverterSpec extends Specification {
 
     def 'should populate existingEntity from inputEntity'() {
         given:
-        def existingEntity = new User(id: 1L, email: "", firstName: "", lastName: "")
+        def existingEntity = new User(userId: 1L, email: "", firstName: "", lastName: "")
         def inputEntity = new User(email: "geohot@comma.ai", firstName: "George", lastName: "Hotz")
 
         when:
         converter.populateEntity(existingEntity, inputEntity)
 
         then:
-        existingEntity.id == 1L
+        existingEntity.userId == 1L
         existingEntity.email == "geohot@comma.ai"
         existingEntity.firstName == "George"
         existingEntity.lastName == "Hotz"

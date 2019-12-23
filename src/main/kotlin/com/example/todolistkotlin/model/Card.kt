@@ -12,14 +12,19 @@ data class Card(
     var title: String?,
 
     @Column(name = "description")
-    var description: String?
+    var description: String?,
+
+    @ManyToOne(
+        cascade = [CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH],
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "user_id", nullable = false)
+    var creator: User
 ) {
 
-    constructor(card: Card) : this(card.title, card.description)
+    constructor(card: Card) : this(card.title, card.description, card.creator)
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null
-
+    var cardId: Long? = null
 }
-

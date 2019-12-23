@@ -65,7 +65,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
     fun `should find user by id`() {
         // given:
         val fullySetUserEntity = fullySetUserEntity()
-        val userId = repository.saveUser(fullySetUserEntity).id!!
+        val userId = repository.saveUser(fullySetUserEntity).userId!!
 
         // when:
         val userDto = service.findUserById(userId)
@@ -100,7 +100,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
     fun `should update existing user`() {
         // given:
         val fullySetUserEntity = fullySetUserEntity()
-        val existingUserId = givenExistingUser(fullySetUserEntity).id!!
+        val existingUserId = givenExistingUser(fullySetUserEntity).userId!!
         val inputUserData = fullySetUserDto()
         assertAll {
             assertThat(fullySetUserEntity.email).isNotEqualTo(inputUserData.email)
@@ -122,7 +122,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should delete user by user id`() {
         // given:
-        val userForDeletionId = givenExistingUser(fullySetUserEntity()).id!!
+        val userForDeletionId = givenExistingUser(fullySetUserEntity()).userId!!
 
         // when:
         service.deleteUserById(userForDeletionId)

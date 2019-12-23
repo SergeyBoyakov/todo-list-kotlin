@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty
 class User() {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null
+    var userId: Long? = null
 
     @Column(name = "email", nullable = false, unique = true)
     @NotEmpty
