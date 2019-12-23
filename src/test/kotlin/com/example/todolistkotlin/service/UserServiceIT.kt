@@ -22,7 +22,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
     @BeforeEach
     @AfterEach
     fun cleanupDb() {
-        repository.deleteAllUsers()
+        repository.deleteAll()
     }
 
     @Test
@@ -65,7 +65,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
     fun `should find user by id`() {
         // given:
         val fullySetUserEntity = fullySetUserEntity()
-        val userId = repository.saveUser(fullySetUserEntity).userId!!
+        val userId = repository.save(fullySetUserEntity).userId!!
 
         // when:
         val userDto = service.findUserById(userId)
@@ -129,7 +129,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
 
         // then:
         assertThat {
-            repository.findUserById(userForDeletionId)
+            repository.findById(userForDeletionId)
         }.isFailure().hasMessage("User with id: $userForDeletionId not found")
     }
 
@@ -145,5 +145,5 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
         lastName = "Snow"
     }
 
-    private fun givenExistingUser(user: User) = repository.saveUser(user)
+    private fun givenExistingUser(user: User) = repository.save(user)
 }

@@ -27,7 +27,7 @@ Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
-#### Tech debt: [BE] Migrate to Spring Data JPA ![](https://placehold.it/15/9b45e4/000000?text=+)
+#### Tech debt: [BE] Migrate to Spring Data JPA ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
 #### Tech debt: [BE] separate packages by features ![](https://placehold.it/15/f03c15/000000?text=+) 
