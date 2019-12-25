@@ -1,7 +1,7 @@
 package com.example.todolistkotlin.utils.creator
 
-import com.example.todolistkotlin.dto.UserDto
-import com.example.todolistkotlin.model.User
+import com.example.todolistkotlin.features.user.dto.UserDto
+import com.example.todolistkotlin.features.user.model.User
 
 fun getPredefinedUserDto() = UserDto().apply {
     firstName = "first name dto"

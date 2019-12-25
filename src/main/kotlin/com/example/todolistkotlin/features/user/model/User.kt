@@ -1,4 +1,4 @@
-package com.example.todolistkotlin.model
+package com.example.todolistkotlin.features.user.model
 
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty

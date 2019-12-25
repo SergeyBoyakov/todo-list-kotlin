@@ -1,7 +1,7 @@
-package com.example.todolistkotlin.controller
+package com.example.todolistkotlin.features.user.controller
 
-import com.example.todolistkotlin.dto.UserDto
-import com.example.todolistkotlin.service.UserService
+import com.example.todolistkotlin.features.user.dto.UserDto
+import com.example.todolistkotlin.features.user.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI

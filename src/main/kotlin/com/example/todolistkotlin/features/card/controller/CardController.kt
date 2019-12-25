@@ -1,7 +1,7 @@
-package com.example.todolistkotlin.controller
+package com.example.todolistkotlin.features.card.controller
 
-import com.example.todolistkotlin.dto.CardDto
-import com.example.todolistkotlin.service.CardService
+import com.example.todolistkotlin.features.card.dto.CardDto
+import com.example.todolistkotlin.features.card.service.CardService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI

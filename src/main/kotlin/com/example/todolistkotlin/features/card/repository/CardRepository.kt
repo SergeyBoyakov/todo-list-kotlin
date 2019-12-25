@@ -1,6 +1,6 @@
-package com.example.todolistkotlin.repository
+package com.example.todolistkotlin.features.card.repository
 
-import com.example.todolistkotlin.model.Card
+import com.example.todolistkotlin.features.card.model.Card
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface CardRepository : JpaRepository<Card, Long> {

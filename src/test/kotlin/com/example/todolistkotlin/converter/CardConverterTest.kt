@@ -3,17 +3,19 @@ package com.example.todolistkotlin.converter
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.example.todolistkotlin.dto.CardDto
-import com.example.todolistkotlin.model.Card
-import com.example.todolistkotlin.model.User
-import com.example.todolistkotlin.utils.creator.getPredefinedUserDto
-import com.example.todolistkotlin.utils.creator.getPredefinedUserEntity
-import io.mockk.mockk
+import com.example.todolistkotlin.features.card.converter.CardConverter
+import com.example.todolistkotlin.utils.creator.getPredefinedCardDto
+import com.example.todolistkotlin.utils.creator.getPredefinedCardEntity
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class CardConverterTest {
-    private val userConverter = mockk<UserConverter>(relaxed = true)
-    private val converter = CardConverter(userConverter)
+    private lateinit var converter: CardConverter
+
+    @BeforeEach
+    fun init() {
+        converter = CardConverter()
+    }
 
     @Test
     fun `should convert dto to entity`() {
@@ -21,7 +23,6 @@ internal class CardConverterTest {
         val cardDto = getPredefinedCardDto().apply {
             title = "title"
             description = "desc"
-            creator = getPredefinedUserDto()
         }
 
         // when:
@@ -39,9 +40,8 @@ internal class CardConverterTest {
     @Test
     fun `should convert entity to dto`() {
         // given:
-        val card = getPredefinedCard().apply {
+        val card = getPredefinedCardEntity().apply {
             cardId = 1L
-            creator = getPredefinedUserEntity()
         }
 
         // when:
@@ -62,7 +62,7 @@ internal class CardConverterTest {
     @Test
     fun `should populate entity`() {
         // given:
-        val cardEntity = getPredefinedCard().apply {
+        val cardEntity = getPredefinedCardEntity().apply {
             cardId = 2L
         }
         val cardDto = getPredefinedCardDto().apply {
@@ -86,12 +86,12 @@ internal class CardConverterTest {
     @Test
     fun `should convert collection of entities to dtos`() {
         // given:
-        val firstCard = getPredefinedCard().apply {
+        val firstCard = getPredefinedCardEntity().apply {
             cardId = 1L
             title = "firstTitle"
             description = "firstDesc"
         }
-        val secondCard = getPredefinedCard().apply {
+        val secondCard = getPredefinedCardEntity().apply {
             cardId = 2L
             title = "secondTitle"
             description = "secondDesc"
@@ -118,13 +118,5 @@ internal class CardConverterTest {
                 }
             }
         }
-    }
-
-    private fun getPredefinedCard() = Card(title = "firstTitle", description = "firstDesc", creator = User())
-
-    private fun getPredefinedCardDto() = CardDto().apply {
-        title = "dto title"
-        description = "dto desc"
-        creator = getPredefinedUserDto()
     }
 }

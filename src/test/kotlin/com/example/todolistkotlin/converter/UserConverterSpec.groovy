@@ -1,7 +1,8 @@
 package com.example.todolistkotlin.converter
 
-import com.example.todolistkotlin.dto.UserDto
-import com.example.todolistkotlin.model.User
+import com.example.todolistkotlin.features.user.dto.UserDto
+import com.example.todolistkotlin.features.user.converter.UserConverter
+import com.example.todolistkotlin.features.user.model.User
 import spock.lang.Specification
 
 class UserConverterSpec extends Specification {

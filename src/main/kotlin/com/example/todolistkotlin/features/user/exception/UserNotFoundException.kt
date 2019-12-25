@@ -1,4 +1,4 @@
-package com.example.todolistkotlin.exception
+package com.example.todolistkotlin.features.user.exception
 
 import java.lang.RuntimeException
 
