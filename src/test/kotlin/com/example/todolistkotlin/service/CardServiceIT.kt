@@ -2,20 +2,29 @@ package com.example.todolistkotlin.service
 
 import assertk.assertAll
 import assertk.assertThat
-import assertk.assertions.*
+import assertk.assertions.hasSize
+import assertk.assertions.isEqualTo
+import assertk.assertions.isNotNull
 import com.example.todolistkotlin.MicroserviceIsolatedTest
-import com.example.todolistkotlin.dto.CardDto
-import com.example.todolistkotlin.repository.CardRepository
+import com.example.todolistkotlin.features.card.dto.CardDto
+import com.example.todolistkotlin.features.card.exception.CardNotFoundException
+import com.example.todolistkotlin.features.card.repository.CardRepository
+import com.example.todolistkotlin.features.card.service.CardService
+import com.example.todolistkotlin.features.user.repository.UserRepository
 import com.example.todolistkotlin.utils.creator.getPredefinedCardDto
 import com.example.todolistkotlin.utils.creator.getPredefinedCardEntity
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import java.util.*
 
 open class CardServiceIT : MicroserviceIsolatedTest() {
     @Autowired
     lateinit var cardRepository: CardRepository
+
+    @Autowired
+    lateinit var userRepository: UserRepository
 
     @Autowired
     lateinit var cardService: CardService
@@ -24,6 +33,7 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @AfterEach
     fun cleanupDb() {
         cardRepository.deleteAll()
+        userRepository.deleteAll()
     }
 
     @Test
@@ -38,8 +48,8 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
             description = "secondDescription"
         }
 
-        cardRepository.save(firstCard)
-        cardRepository.save(secondCard)
+        cardRepository.saveAndFlush(firstCard)
+        cardRepository.saveAndFlush(secondCard)
 
         // when:
         val foundCards = cardService.findAllCards()
@@ -82,11 +92,11 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
     @Test
     fun `should update card by id`() {
         // given:
-        val existingCard = cardRepository.save(getPredefinedCardEntity())
+        val existingCard = cardRepository.saveAndFlush(getPredefinedCardEntity())
         with(existingCard) {
             assertThat(cardId).isNotNull()
-            assertThat(title).isEqualTo("")
-            assertThat(description).isEqualTo("")
+            assertThat(title).isEqualTo("firstTitle")
+            assertThat(description).isEqualTo("firstDescription")
         }
 
         val cardDto = CardDto().apply {
@@ -95,12 +105,13 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
         }
 
         // when:
-        val updatedCard = cardService.updateCard(cardDto, existingCard.cardId!!)
+        cardService.updateCard(cardDto, existingCard.cardId!!)
 
         // then:
+        val updatedCard =
+            cardRepository.findById(existingCard.cardId!!).orElseThrow { CardNotFoundException(existingCard.cardId!!) }
         with(updatedCard) {
             assertAll {
-                assertThat(id).isEqualTo(existingCard.cardId)
                 assertThat(title).isEqualTo("new title")
                 assertThat(description).isEqualTo("new desc")
             }
@@ -116,7 +127,6 @@ open class CardServiceIT : MicroserviceIsolatedTest() {
         cardService.deleteCardById(cardId!!)
 
         // then:
-        assertThat { cardRepository.findById(cardId) }
-            .isFailure().hasMessage("Card with id: $cardId not found")
+        assertThat(cardRepository.findById(cardId)).isEqualTo(Optional.empty())
     }
 }

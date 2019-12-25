@@ -1,10 +1,11 @@
-package com.example.todolistkotlin.service
+package com.example.todolistkotlin.features.card.service
 
-import com.example.todolistkotlin.converter.CardConverter
-import com.example.todolistkotlin.dto.CardDto
-import com.example.todolistkotlin.exception.CardNotFoundException
-import com.example.todolistkotlin.model.Card
-import com.example.todolistkotlin.repository.CardRepository
+import com.example.todolistkotlin.features.card.converter.CardConverter
+import com.example.todolistkotlin.features.card.dto.CardDto
+import com.example.todolistkotlin.features.card.exception.CardNotFoundException
+import com.example.todolistkotlin.features.card.model.Card
+import com.example.todolistkotlin.features.card.repository.CardRepository
+import com.example.todolistkotlin.features.user.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

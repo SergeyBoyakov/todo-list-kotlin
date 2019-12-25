@@ -1,5 +1,6 @@
-package com.example.todolistkotlin.model
+package com.example.todolistkotlin.features.card.model
 
+import com.example.todolistkotlin.features.user.model.User
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import javax.persistence.*
 
@@ -14,12 +15,7 @@ data class Card(
     @Column(name = "description")
     var description: String?,
 
-    @ManyToOne(
-        cascade = [CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH],
-        fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "user_id", nullable = false)
-    var creator: User
+    var creator: String
 ) {
 
     constructor(card: Card) : this(card.title, card.description, card.creator)

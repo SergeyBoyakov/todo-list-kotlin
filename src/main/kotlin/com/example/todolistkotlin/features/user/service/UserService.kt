@@ -1,10 +1,10 @@
-package com.example.todolistkotlin.service
+package com.example.todolistkotlin.features.user.service
 
-import com.example.todolistkotlin.converter.UserConverter
-import com.example.todolistkotlin.dto.UserDto
-import com.example.todolistkotlin.exception.UserNotFoundException
-import com.example.todolistkotlin.model.User
-import com.example.todolistkotlin.repository.UserRepository
+import com.example.todolistkotlin.features.user.converter.UserConverter
+import com.example.todolistkotlin.features.user.dto.UserDto
+import com.example.todolistkotlin.features.user.exception.UserNotFoundException
+import com.example.todolistkotlin.features.user.model.User
+import com.example.todolistkotlin.features.user.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -22,7 +22,11 @@ class UserService(
 
     fun findUserById(userId: Long): UserDto {
         val user = userRepository.findById(userId)
-            .orElseThrow { UserNotFoundException(userId) }
+            .orElseThrow {
+                UserNotFoundException(
+                    userId
+                )
+            }
 
         return userConverter.toDto(user)
     }
@@ -35,7 +39,11 @@ class UserService(
     }
 
     fun findUserEntityById(userId: Long): User = userRepository.findById(userId)
-        .orElseThrow { UserNotFoundException(userId) }
+        .orElseThrow {
+            UserNotFoundException(
+                userId
+            )
+        }
 
     fun updateUser(user: UserDto, userId: Long): UserDto {
         val existingUser = this.findUserEntityById(userId)

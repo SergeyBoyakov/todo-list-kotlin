@@ -1,4 +1,4 @@
-package com.example.todolistkotlin.dto
+package com.example.todolistkotlin.features.user.dto
 
 class UserDto {
     var id: Long? = null

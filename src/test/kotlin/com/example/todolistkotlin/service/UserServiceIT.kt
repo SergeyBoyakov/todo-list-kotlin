@@ -4,13 +4,15 @@ import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.*
 import com.example.todolistkotlin.MicroserviceIsolatedTest
-import com.example.todolistkotlin.dto.UserDto
-import com.example.todolistkotlin.model.User
-import com.example.todolistkotlin.repository.UserRepository
+import com.example.todolistkotlin.features.user.dto.UserDto
+import com.example.todolistkotlin.features.user.model.User
+import com.example.todolistkotlin.features.user.repository.UserRepository
+import com.example.todolistkotlin.features.user.service.UserService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import java.util.*
 
 internal class UserServiceIT : MicroserviceIsolatedTest() {
 
@@ -128,9 +130,7 @@ internal class UserServiceIT : MicroserviceIsolatedTest() {
         service.deleteUserById(userForDeletionId)
 
         // then:
-        assertThat {
-            repository.findById(userForDeletionId)
-        }.isFailure().hasMessage("User with id: $userForDeletionId not found")
+        assertThat(repository.findById(userForDeletionId)).isEqualTo(Optional.empty())
     }
 
     private fun fullySetUserDto() = UserDto().apply {
