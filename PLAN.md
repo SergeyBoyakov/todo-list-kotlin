@@ -27,22 +27,20 @@ Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 Status: DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
-#### Tech debt: [BE] Migrate to Spring Data JPA ![](https://placehold.it/15/42e6a4/000000?text=+)
+#### Tech debt: [BE] Migrate to Spring Data JPA DONE ![](https://placehold.it/15/42e6a4/000000?text=+)
 
 ---
-#### Tech debt: [BE] separate packages by features ![](https://placehold.it/15/f03c15/000000?text=+) 
+#### Tech debt: [BE] separate packages by features DONE ![](https://placehold.it/15/42e6a4/000000?text=+) 
 
 1. Move all classes for Card feature to specific package
-Status: todo
 
 2. Move all classes for Users feature to specific package
-Status: todo
 
 ---
-#### Tech debt: [BE] add controller tests ![](https://placehold.it/15/f03c15/000000?text=+) 
+#### Tech debt: [BE] add controller tests IN PROGRESS ![](https://placehold.it/15/9b45e4/000000?text=+) 
 
 1. Add tests for card controller
-Status: todo
+Status: In progress
 
 2. Add tests for user controller
 Status: todo

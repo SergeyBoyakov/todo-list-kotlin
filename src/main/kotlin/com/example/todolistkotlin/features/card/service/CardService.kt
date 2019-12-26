@@ -5,7 +5,6 @@ import com.example.todolistkotlin.features.card.dto.CardDto
 import com.example.todolistkotlin.features.card.exception.CardNotFoundException
 import com.example.todolistkotlin.features.card.model.Card
 import com.example.todolistkotlin.features.card.repository.CardRepository
-import com.example.todolistkotlin.features.user.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

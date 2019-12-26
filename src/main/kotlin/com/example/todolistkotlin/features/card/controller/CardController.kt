@@ -6,22 +6,17 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
 
-
 @RestController
 @RequestMapping("/cards")
 class CardController(private val cardService: CardService) {
 
     @GetMapping
-    fun findAllCards(): ResponseEntity<List<CardDto>> {
-        cardService.findAllCards()
-
-        return ResponseEntity.ok(listOf())
-    }
+    fun findAllCards(): ResponseEntity<List<CardDto>> = ResponseEntity.ok(cardService.findAllCards())
 
     @PostMapping
     fun createCard(cardDto: CardDto): ResponseEntity<URI> {
-        val createCard = cardService.createCard(cardDto)
-        val id = createCard.id
+        val createdCard = cardService.createCard(cardDto)
+        val id = createdCard.id
 
         return ResponseEntity.created(URI.create("/cards/$id")).build()
     }
