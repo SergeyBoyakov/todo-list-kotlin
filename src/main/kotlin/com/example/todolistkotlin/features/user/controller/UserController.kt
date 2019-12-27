@@ -14,9 +14,8 @@ class UserController(private val userService: UserService) {
     fun findAllUsers(): ResponseEntity<List<UserDto>> = ResponseEntity.ok(userService.findAllUsers())
 
     @GetMapping("/{userId}")
-    fun findUserById(@PathVariable(value = "userId") userId: Long): ResponseEntity<UserDto> {
-        return ResponseEntity.ok(userService.findUserById(userId))
-    }
+    fun findUserById(@PathVariable(value = "userId") userId: Long): ResponseEntity<UserDto> =
+        ResponseEntity.ok(userService.findUserById(userId))
 
     @PostMapping
     fun createUser(@RequestBody user: UserDto): ResponseEntity<UserDto> {
@@ -29,7 +28,7 @@ class UserController(private val userService: UserService) {
     fun updateUser(@RequestBody user: UserDto, @PathVariable(value = "userId") userId: Long): ResponseEntity<UserDto> {
         val updatedUser = userService.updateUser(user, userId)
 
-        return ResponseEntity.ok(updatedUser)
+        return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("/{userId}")
